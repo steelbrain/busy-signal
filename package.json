@@ -3,8 +3,7 @@
   "main": "./lib/busy-signal",
   "version": "0.0.0",
   "description": "A short description of your package",
-  "keywords": [
-  ],
+  "keywords": [],
   "activationCommands": {
     "atom-workspace": "busy-signal:toggle"
   },
@@ -14,5 +13,13 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
+    "babel-eslint": "^5.0.0",
+    "eslint": "~2.2.0",
+    "eslint-config-airbnb": "^6.1.0",
+    "eslint-plugin-react": "^4.2.3"
+  },
+  "scripts": {
+    "test": "apm test",
+    "lint": "eslint ."
   }
 }
