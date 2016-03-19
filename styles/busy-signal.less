@@ -14,10 +14,15 @@ busy-signal {
   }
 
   &.busy {
-    -webkit-animation-name: spin;
+    -webkit-animation-name: busy-signal-spin;
     -webkit-animation-duration: 700ms;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
     color: @text-color-warning;
   }
+}
+
+@-webkit-keyframes busy-signal-spin {
+  from { transform:rotate(0deg); }
+  to { transform:rotate(360deg); }
 }
