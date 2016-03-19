@@ -19,6 +19,13 @@
       }
     }
   },
+  "providedServices": {
+    "busy-signal": {
+      "versions": {
+        "1.0.0": "providerRegistry"
+      }
+    }
+  },
   "dependencies": {
     "babel-eslint": "^5.0.0",
     "disposify": "^1.0.0",
