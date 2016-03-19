@@ -7,7 +7,7 @@
     "busy",
     "signal"
   ],
-  "repository": "https://github.com/atom/busy-signal",
+  "repository": "https://github.com/steelbrain/busy-signal",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
