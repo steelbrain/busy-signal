@@ -1,8 +1,8 @@
 {
   "name": "busy-signal",
-  "main": "./lib/busy-signal",
+  "main": "./lib/main",
   "version": "0.0.0",
-  "description": "A short description of your package",
+  "description": "A package that provides an easy to use API to show your package is performing a task",
   "keywords": ["busy", "signal"],
   "repository": "https://github.com/atom/busy-signal",
   "license": "MIT",
