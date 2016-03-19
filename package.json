@@ -1,16 +1,27 @@
 {
   "name": "busy-signal",
-  "main": "./lib/main",
+  "main": "./lib/index",
   "version": "0.0.0",
   "description": "A package that provides an easy to use API to show your package is performing a task",
-  "keywords": ["busy", "signal"],
+  "keywords": [
+    "busy",
+    "signal"
+  ],
   "repository": "https://github.com/atom/busy-signal",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
+  "consumedServices": {
+    "status-bar": {
+      "versions": {
+        "^1.0.0": "consumeStatusBar"
+      }
+    }
+  },
   "dependencies": {
     "babel-eslint": "^5.0.0",
+    "disposify": "^1.0.0",
     "eslint": "~2.2.0",
     "eslint-config-airbnb": "^6.1.0",
     "eslint-plugin-react": "^4.2.3"

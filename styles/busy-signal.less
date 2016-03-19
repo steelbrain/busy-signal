@@ -4,5 +4,17 @@
 // for a full listing of what's available.
 @import "ui-variables";
 
-.busy-signal {
+busy-signal {
+  font-family: 'Octicons Regular';
+  -webkit-font-smoothing: antialiased;
+  &.idle {
+    color: @text-color-success;
+  }
+  &.busy {
+    -webkit-animation-name: spin;
+    -webkit-animation-duration: 700ms;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    color: @text-color-warning;
+  }
 }
