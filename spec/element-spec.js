@@ -1,5 +1,7 @@
 'use babel'
 
+/* @flow */
+
 import Element from '../lib/element'
 
 describe('Element', function() {
