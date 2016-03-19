@@ -6,6 +6,7 @@
     "beforeEach": true,
     "afterEach": true,
     "jasmine": true,
-    "expect": true
+    "expect": true,
+    "spyOn": true
   }
 }
