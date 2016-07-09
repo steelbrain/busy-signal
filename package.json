@@ -31,10 +31,7 @@
     "escape-html": "^1.0.3"
   },
   "devDependencies": {
-    "babel-eslint": "^5.0.0",
-    "eslint": "~2.2.0",
-    "eslint-config-airbnb": "^6.1.0",
-    "eslint-plugin-react": "^4.2.3"
+    "eslint-config-steelbrain": "^1.0.1"
   },
   "scripts": {
     "test": "apm test",
