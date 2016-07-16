@@ -1,5 +1,3 @@
-'use babel'
-
 /* @flow */
 
 import Element from '../lib/element'

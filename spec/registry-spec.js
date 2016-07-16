@@ -1,5 +1,3 @@
-'use babel'
-
 /* @flow */
 
 import Registry from '../lib/registry'
