@@ -17,11 +17,11 @@ describe('Element', function() {
   it('sets a title properly', function() {
     element.update(['Hello'], [])
     expect(element.setBusy).toHaveBeenCalledWith(true)
-    expect(element.setTooltip).toHaveBeenCalledWith('Hello')
+    expect(element.setTooltip).toHaveBeenCalledWith('<strong>Current:</strong><br>Hello')
   })
   it('escapes the given texts', function() {
     element.update(['<div>'], [])
     expect(element.setBusy).toHaveBeenCalledWith(true)
-    expect(element.setTooltip).toHaveBeenCalledWith('&lt;div&gt;')
+    expect(element.setTooltip).toHaveBeenCalledWith('<strong>Current:</strong><br>&lt;div&gt;')
   })
 })
