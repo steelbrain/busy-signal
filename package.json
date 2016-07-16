@@ -31,7 +31,7 @@
     "escape-html": "^1.0.3"
   },
   "devDependencies": {
-    "eslint-config-steelbrain": "^1.0.3"
+    "eslint-config-steelbrain": "^1.0.4"
   },
   "scripts": {
     "test": "apm test",
