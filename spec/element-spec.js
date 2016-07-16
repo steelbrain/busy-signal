@@ -1,5 +1,3 @@
-'use babel'
-
 /* @flow */
 
 import Element from '../lib/element'
@@ -17,13 +15,28 @@ describe('Element', function() {
   })
 
   it('sets a title properly', function() {
-    element.update(['Hello'])
+    element.update(['Hello'], [])
     expect(element.setBusy).toHaveBeenCalledWith(true)
-    expect(element.setTooltip).toHaveBeenCalledWith('Hello')
+    expect(element.setTooltip).toHaveBeenCalledWith('<strong>Current:</strong><br>Hello')
   })
   it('escapes the given texts', function() {
-    element.update(['<div>'])
+    element.update(['<div>'], [])
     expect(element.setBusy).toHaveBeenCalledWith(true)
-    expect(element.setTooltip).toHaveBeenCalledWith('&lt;div&gt;')
+    expect(element.setTooltip).toHaveBeenCalledWith('<strong>Current:</strong><br>&lt;div&gt;')
+  })
+  it('shows idle message when nothing is provided', function() {
+    element.update([], [])
+    expect(element.setBusy).toHaveBeenCalledWith(false)
+    expect(element.setTooltip).toHaveBeenCalledWith('Idle')
+  })
+  it('shows history only when current is not present', function() {
+    element.update([], ['Yo'])
+    expect(element.setBusy).toHaveBeenCalledWith(false)
+    expect(element.setTooltip).toHaveBeenCalledWith('<strong>History:</strong><br>Yo')
+  })
+  it('shows both history and current when both are present', function() {
+    element.update(['Hey'], ['Yo'])
+    expect(element.setBusy).toHaveBeenCalledWith(true)
+    expect(element.setTooltip).toHaveBeenCalledWith('<strong>History:</strong><br>Yo<br><strong>Current:</strong><br>Hey')
   })
 })
