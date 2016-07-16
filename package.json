@@ -36,5 +36,13 @@
   "scripts": {
     "test": "apm test",
     "lint": "eslint ."
+  },
+  "configSchema": {
+    "itemsToShowInHistory": {
+      "description": "Limit the number of items to show in history",
+      "enum": [0, 1, 2, 5, 10],
+      "type": "number",
+      "default": 5
+    }
   }
 }
