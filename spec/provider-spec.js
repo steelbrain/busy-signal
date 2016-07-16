@@ -28,10 +28,10 @@ describe('Provider', function() {
   })
 
   it('emits events properly', function() {
-    const change = jasmine.createSpy('change')
+    const update = jasmine.createSpy('update')
     const dispose = jasmine.createSpy('dispose')
 
-    provider.onDidChange(change)
+    provider.onDidUpdate(update)
     provider.onDidDestroy(dispose)
 
     provider.add('Hey')
@@ -42,9 +42,9 @@ describe('Provider', function() {
 
     provider.dispose()
 
-    expect(change).toHaveBeenCalled()
+    expect(update).toHaveBeenCalled()
     expect(dispose).toHaveBeenCalled()
-    expect(change.calls.length).toBe(4)
+    expect(update.calls.length).toBe(4)
     expect(dispose.calls.length).toBe(1)
   })
 })
