@@ -1,3 +1,8 @@
+## 1.1.0
+
+- Show past signals in history
+- Add a configuration to manage how many history items are shown
+
 ## 1.0.1
 
 - Fix an installation issue with devDeps listed as deps
