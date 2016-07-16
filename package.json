@@ -40,8 +40,9 @@
   "configSchema": {
     "itemsToShowInHistory": {
       "description": "Limit the number of items to show in history",
-      "enum": [0, 1, 2, 5, 10],
-      "type": "number",
+      "maximum": 10,
+      "minimum": 1,
+      "type": "integer",
       "default": 5
     }
   }
