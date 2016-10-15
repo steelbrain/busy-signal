@@ -28,10 +28,11 @@
   },
   "dependencies": {
     "disposify": "^1.0.0",
-    "escape-html": "^1.0.3"
+    "escape-html": "^1.0.3",
+    "humanize-time": "0.0.2"
   },
   "devDependencies": {
-    "eslint-config-steelbrain": "^1.0.4"
+    "eslint-config-steelbrain": "^2.0.0"
   },
   "scripts": {
     "test": "apm test",
