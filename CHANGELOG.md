@@ -1,3 +1,7 @@
+## 1.2.0
+
+- Show duration of execution in tooltip
+
 ## 1.1.0
 
 - Show past signals in history
