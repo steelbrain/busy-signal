@@ -29,14 +29,14 @@ describe('Element', function() {
     expect(element.setBusy).toHaveBeenCalledWith(false)
     expect(element.setTooltip).toHaveBeenCalledWith('Idle')
   })
-  it('shows history only when current is not present', function() {
-    element.update([], ['Yo'])
+  it('shows only history when current is not present', function() {
+    element.update([], [{ title: 'Yo', duration: '1m' }])
     expect(element.setBusy).toHaveBeenCalledWith(false)
-    expect(element.setTooltip).toHaveBeenCalledWith('<strong>History:</strong><br>Yo')
+    expect(element.setTooltip).toHaveBeenCalledWith('<strong>History:</strong><br>Yo ( duration: 1m )')
   })
   it('shows both history and current when both are present', function() {
-    element.update(['Hey'], ['Yo'])
+    element.update(['Hey'], [{ title: 'Yo', duration: '1m' }])
     expect(element.setBusy).toHaveBeenCalledWith(true)
-    expect(element.setTooltip).toHaveBeenCalledWith('<strong>History:</strong><br>Yo<br><strong>Current:</strong><br>Hey')
+    expect(element.setTooltip).toHaveBeenCalledWith('<strong>History:</strong><br>Yo ( duration: 1m )<br><strong>Current:</strong><br>Hey')
   })
 })

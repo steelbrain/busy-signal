@@ -12,39 +12,88 @@ describe('Provider', function() {
     provider.dispose()
   })
 
-  it('has a working way of setting, removing and emptying titles', function() {
-    expect(provider.texts.size).toBe(0)
-    provider.add('Hey')
-    expect(provider.texts.size).toBe(1)
-    const _ = Array.from(provider.texts)[0]
-    expect(_.title).toBe('Hey')
+  it('emits add event properly', function() {
+    let timesTriggered = 0
 
-    provider.remove('Hey')
-    expect(provider.texts.size).toBe(0)
-    provider.add('Wow')
-    expect(provider.texts.size).toBe(1)
-    provider.clear()
-    expect(provider.texts.size).toBe(0)
+    provider.onDidAdd(function({ title, priority }) {
+      if (timesTriggered === 0) {
+        expect(title).toBe('First')
+        expect(priority).toBe(10)
+      } else if (timesTriggered === 1) {
+        expect(title).toBe('Second')
+        expect(priority).toBe(20)
+      } else if (timesTriggered === 2) {
+        expect(title).toBe('Third')
+        expect(priority).toBe(30)
+      } else {
+        expect(false).toBe(true)
+      }
+      timesTriggered++
+    })
+    expect(timesTriggered).toBe(0)
+    provider.add('First', 10)
+    expect(timesTriggered).toBe(1)
+    provider.add('Second', 20)
+    expect(timesTriggered).toBe(2)
+    provider.add('Third', 30)
+    expect(timesTriggered).toBe(3)
   })
+  it('emits remove event properly', function() {
+    let timesTriggered = 0
 
-  it('emits events properly', function() {
-    const update = jasmine.createSpy('update')
-    const dispose = jasmine.createSpy('dispose')
+    provider.onDidRemove(function(title) {
+      if (timesTriggered === 0) {
+        expect(title).toBe('First')
+      } else if (timesTriggered === 1) {
+        expect(title).toBe('Second')
+      } else if (timesTriggered === 2) {
+        expect(title).toBe('Third')
+      } else {
+        expect(false).toBe(true)
+      }
+      timesTriggered++
+    })
 
-    provider.onDidUpdate(update)
-    provider.onDidDestroy(dispose)
+    expect(timesTriggered).toBe(0)
+    provider.remove('First')
+    expect(timesTriggered).toBe(1)
+    provider.remove('Second')
+    expect(timesTriggered).toBe(2)
+    provider.remove('Third')
+    expect(timesTriggered).toBe(3)
+  })
+  it('emits clear event properly', function() {
+    let timesTriggered = 0
 
-    provider.add('Hey')
-    provider.remove('Hey')
+    provider.onDidClear(function() {
+      timesTriggered++
+    })
+
+    expect(timesTriggered).toBe(0)
     provider.clear()
-    provider.add('Hey')
+    expect(timesTriggered).toBe(1)
     provider.clear()
+    expect(timesTriggered).toBe(2)
+    provider.clear()
+    expect(timesTriggered).toBe(3)
+    provider.clear()
+    expect(timesTriggered).toBe(4)
+  })
+  it('emits destroy event properly', function() {
+    let timesTriggered = 0
 
+    provider.onDidDispose(function() {
+      timesTriggered++
+    })
+
+    expect(timesTriggered).toBe(0)
     provider.dispose()
-
-    expect(update).toHaveBeenCalled()
-    expect(dispose).toHaveBeenCalled()
-    expect(update.calls.length).toBe(4)
-    expect(dispose.calls.length).toBe(1)
+    expect(timesTriggered).toBe(1)
+    provider.dispose()
+    expect(timesTriggered).toBe(1)
+    provider.dispose()
+    expect(timesTriggered).toBe(1)
+    provider.dispose()
+    expect(timesTriggered).toBe(1)
   })
 })
