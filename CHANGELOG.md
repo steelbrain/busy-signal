@@ -1,3 +1,8 @@
+## 1.3.0
+
+- Use the Atom native spinner interface
+- Show the spinner for at least a second
+
 ## 1.2.0
 
 - Show duration of execution in tooltip
