@@ -5,24 +5,17 @@
 @import "ui-variables";
 
 busy-signal {
-  font-size: 15px;
-  font-family: 'Octicons Regular';
-  -webkit-font-smoothing: antialiased;
-
-  &.idle {
-    color: @text-color-success;
-  }
-
+  margin-top: 0.4em;
   &.busy {
-    -webkit-animation-name: busy-signal-spin;
-    -webkit-animation-duration: 700ms;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
+    cursor: wait;
     color: @text-color-warning;
+  }
+  &.idle {
+    background: radial-gradient(#64c42d .1em, transparent .11em);
   }
 }
 
-@-webkit-keyframes busy-signal-spin {
-  from { transform:rotate(0deg); }
-  to { transform:rotate(360deg); }
+busy-signal.idle::before, busy-signal.idle::after {
+  display: none;
+  -webkit-animation: none;
 }
