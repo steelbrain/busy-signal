@@ -8,7 +8,7 @@ Please head to [`busy-signal` wiki](https://github.com/steelbrain/busy-signal/wi
 
 ## Screenshot
 
-![busy-signal](https://cloud.githubusercontent.com/assets/4278113/13898536/079db552-ed92-11e5-9762-dc18499d0895.gif)
+![busy-signal](https://cloud.githubusercontent.com/assets/4278113/22865536/0a123074-f188-11e6-8c6e-38574a6fe14c.gif)
 
 ## License
 
