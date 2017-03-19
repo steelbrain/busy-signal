@@ -1,5 +1,7 @@
 # Busy Signal
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/steelbrain/busy-signal.svg)](https://greenkeeper.io/)
+
 Busy Signal is a base package that provides an easy to use API to show your package is performing a task.
 
 ## API
