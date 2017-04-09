@@ -1,3 +1,7 @@
+## Upcoming
+
+- Improve time resolution (now shows ms instead of 0s)
+
 ## 1.3.0
 
 - Use the Atom native spinner interface
