@@ -1,5 +1,6 @@
 /* @flow */
 
+import { it, wait } from 'jasmine-fix'
 import Registry from '../lib/registry'
 
 describe('Registry', function() {
@@ -11,6 +12,14 @@ describe('Registry', function() {
   afterEach(function() {
     registry.dispose()
   })
+  function validateOldTiles(oldTitles: Array<{ title: string, duration: string }>, titles: Array<string>) {
+    expect(oldTitles.length).toBe(titles.length)
+
+    titles.forEach(function(title, index) {
+      expect(oldTitles[index].title).toBe(title)
+      expect(oldTitles[index].duration === '1ms' || oldTitles[index].duration === '0ms').toBe(true)
+    })
+  }
 
   describe('handling of providers', function() {
     it('registers providers properly and clears them out when they die', function() {
@@ -30,38 +39,41 @@ describe('Registry', function() {
       expect(update).toHaveBeenCalled()
       expect(update.calls.length).toBe(2)
     })
-    it('adds and returns sorted titles', function() {
+    it('adds and returns sorted titles', async function() {
       const provider = registry.create()
-      provider.add('Hey', 200)
-      provider.add('Wow', 199)
-      provider.add('Hello', 300)
-      expect(registry.getActiveTitles()).toEqual(['Wow', 'Hey', 'Hello'])
+      provider.add('Hey')
+      await wait(1)
+      provider.add('Wow')
+      await wait(1)
+      provider.add('Hello')
+      expect(registry.getTilesActive()).toEqual(['Hello', 'Wow', 'Hey'])
     })
-    it('adds removed ones to history', function() {
+    it('adds removed ones to history', async function() {
       const provider = registry.create()
-      provider.add('Hey', 100)
-      provider.add('Boy', 100)
-      expect(registry.getActiveTitles()).toEqual(['Hey', 'Boy'])
-      expect(registry.getOldTitles()).toEqual([])
+      provider.add('Boy')
+      await wait(1)
+      provider.add('Hey')
+      expect(registry.getTilesActive()).toEqual(['Hey', 'Boy'])
+      expect(registry.getTilesOld()).toEqual([])
 
       provider.remove('Hey')
-      expect(registry.getActiveTitles()).toEqual(['Boy'])
-      expect(registry.getOldTitles()).toEqual([{ title: 'Hey', duration: '0ms' }])
+      expect(registry.getTilesActive()).toEqual(['Boy'])
+      validateOldTiles(registry.getTilesOld(), ['Hey'])
     })
     it('adds cleared ones to history', function() {
       const provider = registry.create()
       provider.add('Hello')
       provider.add('World')
 
-      expect(registry.getActiveTitles()).toEqual(['Hello', 'World'])
-      expect(registry.getOldTitles()).toEqual([])
+      expect(registry.getTilesActive()).toEqual(['Hello', 'World'])
+      expect(registry.getTilesOld()).toEqual([])
 
       provider.clear()
-      expect(registry.getActiveTitles()).toEqual([])
-      expect(registry.getOldTitles()).toEqual([{ title: 'Hello', duration: '0ms' }, { title: 'World', duration: '0ms' }])
+      expect(registry.getTilesActive()).toEqual([])
+      validateOldTiles(registry.getTilesOld(), ['Hello', 'World'])
     })
   })
-  describe('getOldTitles', function() {
+  describe('getTilesOld', function() {
     it('excludes active ones from history', function() {
       const provider = registry.create()
       provider.add('Yo CJ')
@@ -70,7 +82,7 @@ describe('Registry', function() {
       provider.remove('Murica')
       provider.add('Yo CJ')
 
-      expect(registry.getOldTitles()).toEqual([{ title: 'Murica', duration: '0ms' }])
+      validateOldTiles(registry.getTilesOld(), ['Murica'])
     })
     it('excludes duplicates and only returns the last one', function() {
       const provider = registry.create()
@@ -82,21 +94,7 @@ describe('Registry', function() {
       provider.add('Some')
       provider.remove('Some')
 
-      expect(registry.getOldTitles()).toEqual([{ title: 'Things', duration: '0ms' }, { title: 'Some', duration: '0ms' }])
-    })
-    it('respects itemsToShowInHistory', function() {
-      const provider = registry.create()
-      for (let i = 0; i < 50; i++) {
-        provider.add(i.toString())
-      }
-      provider.clear()
-
-      atom.config.set('busy-signal.itemsToShowInHistory', 1)
-      expect(registry.getOldTitles().length).toBe(1)
-      atom.config.set('busy-signal.itemsToShowInHistory', 5)
-      expect(registry.getOldTitles().length).toBe(5)
-      atom.config.set('busy-signal.itemsToShowInHistory', 10)
-      expect(registry.getOldTitles().length).toBe(10)
+      validateOldTiles(registry.getTilesOld(), ['Things', 'Some'])
     })
   })
 })

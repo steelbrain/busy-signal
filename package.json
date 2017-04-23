@@ -29,22 +29,15 @@
   "dependencies": {
     "disposify": "^1.0.0",
     "escape-html": "^1.0.3",
-    "ms": "^1.0.0"
+    "ms": "^1.0.0",
+    "uuid4": "^1.0.0"
   },
   "devDependencies": {
-    "eslint-config-steelbrain": "^3.0.1"
+    "eslint-config-steelbrain": "^3.0.1",
+    "jasmine-fix": "^1.0.1"
   },
   "scripts": {
     "test": "apm test",
     "lint": "eslint ."
-  },
-  "configSchema": {
-    "itemsToShowInHistory": {
-      "description": "Limit the number of items to show in history",
-      "maximum": 10,
-      "minimum": 1,
-      "type": "integer",
-      "default": 5
-    }
   }
 }
