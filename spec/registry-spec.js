@@ -35,33 +35,33 @@ describe('Registry', function() {
       provider.add('Hey', 200)
       provider.add('Wow', 199)
       provider.add('Hello', 300)
-      expect(registry.getActiveTitles()).toEqual(['Wow', 'Hey', 'Hello'])
+      expect(registry.getTilesActive()).toEqual(['Wow', 'Hey', 'Hello'])
     })
     it('adds removed ones to history', function() {
       const provider = registry.create()
       provider.add('Hey', 100)
       provider.add('Boy', 100)
-      expect(registry.getActiveTitles()).toEqual(['Hey', 'Boy'])
-      expect(registry.getOldTitles()).toEqual([])
+      expect(registry.getTilesActive()).toEqual(['Hey', 'Boy'])
+      expect(registry.getTilesOld()).toEqual([])
 
       provider.remove('Hey')
-      expect(registry.getActiveTitles()).toEqual(['Boy'])
-      expect(registry.getOldTitles()).toEqual([{ title: 'Hey', duration: '0ms' }])
+      expect(registry.getTilesActive()).toEqual(['Boy'])
+      expect(registry.getTilesOld()).toEqual([{ title: 'Hey', duration: '0ms' }])
     })
     it('adds cleared ones to history', function() {
       const provider = registry.create()
       provider.add('Hello')
       provider.add('World')
 
-      expect(registry.getActiveTitles()).toEqual(['Hello', 'World'])
-      expect(registry.getOldTitles()).toEqual([])
+      expect(registry.getTilesActive()).toEqual(['Hello', 'World'])
+      expect(registry.getTilesOld()).toEqual([])
 
       provider.clear()
-      expect(registry.getActiveTitles()).toEqual([])
-      expect(registry.getOldTitles()).toEqual([{ title: 'Hello', duration: '0ms' }, { title: 'World', duration: '0ms' }])
+      expect(registry.getTilesActive()).toEqual([])
+      expect(registry.getTilesOld()).toEqual([{ title: 'Hello', duration: '0ms' }, { title: 'World', duration: '0ms' }])
     })
   })
-  describe('getOldTitles', function() {
+  describe('getTilesOld', function() {
     it('excludes active ones from history', function() {
       const provider = registry.create()
       provider.add('Yo CJ')
@@ -70,7 +70,7 @@ describe('Registry', function() {
       provider.remove('Murica')
       provider.add('Yo CJ')
 
-      expect(registry.getOldTitles()).toEqual([{ title: 'Murica', duration: '0ms' }])
+      expect(registry.getTilesOld()).toEqual([{ title: 'Murica', duration: '0ms' }])
     })
     it('excludes duplicates and only returns the last one', function() {
       const provider = registry.create()
@@ -82,7 +82,7 @@ describe('Registry', function() {
       provider.add('Some')
       provider.remove('Some')
 
-      expect(registry.getOldTitles()).toEqual([{ title: 'Things', duration: '0ms' }, { title: 'Some', duration: '0ms' }])
+      expect(registry.getTilesOld()).toEqual([{ title: 'Things', duration: '0ms' }, { title: 'Some', duration: '0ms' }])
     })
   })
 })

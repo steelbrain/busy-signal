@@ -15,27 +15,24 @@ describe('Provider', function() {
   it('emits add event properly', function() {
     let timesTriggered = 0
 
-    provider.onDidAdd(function({ title, priority }) {
+    provider.onDidAdd(function(title) {
       if (timesTriggered === 0) {
         expect(title).toBe('First')
-        expect(priority).toBe(10)
       } else if (timesTriggered === 1) {
         expect(title).toBe('Second')
-        expect(priority).toBe(20)
       } else if (timesTriggered === 2) {
         expect(title).toBe('Third')
-        expect(priority).toBe(30)
       } else {
         expect(false).toBe(true)
       }
       timesTriggered++
     })
     expect(timesTriggered).toBe(0)
-    provider.add('First', 10)
+    provider.add('First')
     expect(timesTriggered).toBe(1)
-    provider.add('Second', 20)
+    provider.add('Second')
     expect(timesTriggered).toBe(2)
-    provider.add('Third', 30)
+    provider.add('Third')
     expect(timesTriggered).toBe(3)
   })
   it('emits remove event properly', function() {

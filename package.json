@@ -29,7 +29,8 @@
   "dependencies": {
     "disposify": "^1.0.0",
     "escape-html": "^1.0.3",
-    "ms": "^1.0.0"
+    "ms": "^1.0.0",
+    "uuid4": "^1.0.0"
   },
   "devDependencies": {
     "eslint-config-steelbrain": "^3.0.1"
