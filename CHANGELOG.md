@@ -1,4 +1,4 @@
-## Upcoming
+## 1.4.0
 
 - Major performance improvements
 - Make the duration view more compact
