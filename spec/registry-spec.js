@@ -11,6 +11,14 @@ describe('Registry', function() {
   afterEach(function() {
     registry.dispose()
   })
+  function validateOldTiles(oldTitles: Array<{ title: string, duration: string }>, titles: Array<string>) {
+    expect(oldTitles.length).toBe(titles.length)
+
+    titles.forEach(function(title, index) {
+      expect(oldTitles[index].title).toBe(title)
+      expect(oldTitles[index].duration === '1ms' || oldTitles[index].duration === '0ms').toBe(true)
+    })
+  }
 
   describe('handling of providers', function() {
     it('registers providers properly and clears them out when they die', function() {
@@ -32,21 +40,21 @@ describe('Registry', function() {
     })
     it('adds and returns sorted titles', function() {
       const provider = registry.create()
-      provider.add('Hey', 200)
-      provider.add('Wow', 199)
-      provider.add('Hello', 300)
-      expect(registry.getTilesActive()).toEqual(['Wow', 'Hey', 'Hello'])
+      provider.add('Hey')
+      provider.add('Wow')
+      provider.add('Hello')
+      expect(registry.getTilesActive()).toEqual(['Hey', 'Wow', 'Hello'])
     })
     it('adds removed ones to history', function() {
       const provider = registry.create()
-      provider.add('Hey', 100)
-      provider.add('Boy', 100)
-      expect(registry.getTilesActive()).toEqual(['Hey', 'Boy'])
+      provider.add('Boy')
+      provider.add('Hey')
+      expect(registry.getTilesActive()).toEqual(['Boy', 'Hey'])
       expect(registry.getTilesOld()).toEqual([])
 
       provider.remove('Hey')
       expect(registry.getTilesActive()).toEqual(['Boy'])
-      expect(registry.getTilesOld()).toEqual([{ title: 'Hey', duration: '0ms' }])
+      validateOldTiles(registry.getTilesOld(), ['Hey'])
     })
     it('adds cleared ones to history', function() {
       const provider = registry.create()
@@ -58,7 +66,7 @@ describe('Registry', function() {
 
       provider.clear()
       expect(registry.getTilesActive()).toEqual([])
-      expect(registry.getTilesOld()).toEqual([{ title: 'Hello', duration: '0ms' }, { title: 'World', duration: '0ms' }])
+      validateOldTiles(registry.getTilesOld(), ['Hello', 'World'])
     })
   })
   describe('getTilesOld', function() {
@@ -70,7 +78,7 @@ describe('Registry', function() {
       provider.remove('Murica')
       provider.add('Yo CJ')
 
-      expect(registry.getTilesOld()).toEqual([{ title: 'Murica', duration: '0ms' }])
+      validateOldTiles(registry.getTilesOld(), ['Murica'])
     })
     it('excludes duplicates and only returns the last one', function() {
       const provider = registry.create()
@@ -82,7 +90,7 @@ describe('Registry', function() {
       provider.add('Some')
       provider.remove('Some')
 
-      expect(registry.getTilesOld()).toEqual([{ title: 'Things', duration: '0ms' }, { title: 'Some', duration: '0ms' }])
+      validateOldTiles(registry.getTilesOld(), ['Things', 'Some'])
     })
   })
 })
