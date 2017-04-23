@@ -33,7 +33,8 @@
     "uuid4": "^1.0.0"
   },
   "devDependencies": {
-    "eslint-config-steelbrain": "^3.0.1"
+    "eslint-config-steelbrain": "^3.0.1",
+    "jasmine-fix": "^1.0.1"
   },
   "scripts": {
     "test": "apm test",

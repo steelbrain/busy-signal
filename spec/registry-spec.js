@@ -1,5 +1,6 @@
 /* @flow */
 
+import { it, wait } from 'jasmine-fix'
 import Registry from '../lib/registry'
 
 describe('Registry', function() {
@@ -38,18 +39,21 @@ describe('Registry', function() {
       expect(update).toHaveBeenCalled()
       expect(update.calls.length).toBe(2)
     })
-    it('adds and returns sorted titles', function() {
+    it('adds and returns sorted titles', async function() {
       const provider = registry.create()
       provider.add('Hey')
+      await wait(1)
       provider.add('Wow')
+      await wait(1)
       provider.add('Hello')
-      expect(registry.getTilesActive()).toEqual(['Hey', 'Wow', 'Hello'])
+      expect(registry.getTilesActive()).toEqual(['Hello', 'Wow', 'Hey'])
     })
-    it('adds removed ones to history', function() {
+    it('adds removed ones to history', async function() {
       const provider = registry.create()
       provider.add('Boy')
+      await wait(1)
       provider.add('Hey')
-      expect(registry.getTilesActive()).toEqual(['Boy', 'Hey'])
+      expect(registry.getTilesActive()).toEqual(['Hey', 'Boy'])
       expect(registry.getTilesOld()).toEqual([])
 
       provider.remove('Hey')
