@@ -84,19 +84,5 @@ describe('Registry', function() {
 
       expect(registry.getOldTitles()).toEqual([{ title: 'Things', duration: '0ms' }, { title: 'Some', duration: '0ms' }])
     })
-    it('respects itemsToShowInHistory', function() {
-      const provider = registry.create()
-      for (let i = 0; i < 50; i++) {
-        provider.add(i.toString())
-      }
-      provider.clear()
-
-      atom.config.set('busy-signal.itemsToShowInHistory', 1)
-      expect(registry.getOldTitles().length).toBe(1)
-      atom.config.set('busy-signal.itemsToShowInHistory', 5)
-      expect(registry.getOldTitles().length).toBe(5)
-      atom.config.set('busy-signal.itemsToShowInHistory', 10)
-      expect(registry.getOldTitles().length).toBe(10)
-    })
   })
 })
