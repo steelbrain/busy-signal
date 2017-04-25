@@ -1,3 +1,7 @@
+## 1.4.1
+
+- Drop UUID4 in favor of `Math.random()`
+
 ## 1.4.0
 
 - Major performance improvements
