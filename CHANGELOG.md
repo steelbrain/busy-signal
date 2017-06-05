@@ -1,3 +1,7 @@
+## 1.4.2
+
+- Change busy signal element to be much smoother
+
 ## 1.4.1
 
 - Drop UUID4 in favor of `Math.random()`
