@@ -1,3 +1,7 @@
+## 1.4.3
+
+- Fix an issue with addEventListener
+
 ## 1.4.2
 
 - Change busy signal element to be much smoother
