@@ -46,14 +46,14 @@ describe('Registry', function() {
       provider.add('Wow')
       await wait(1)
       provider.add('Hello')
-      expect(registry.getTilesActive()).toEqual(['Hey', 'Wow', 'Hello'])
+      expect(registry.getTilesActive()).toEqual(['Hello', 'Wow', 'Hey'])
     })
     it('adds removed ones to history', async function() {
       const provider = registry.create()
       provider.add('Boy')
       await wait(1)
       provider.add('Hey')
-      expect(registry.getTilesActive()).toEqual(['Boy', 'Hey'])
+      expect(registry.getTilesActive()).toEqual(['Hey', 'Boy'])
       expect(registry.getTilesOld()).toEqual([])
 
       provider.remove('Hey')
