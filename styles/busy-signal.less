@@ -5,17 +5,46 @@
 @import "ui-variables";
 
 busy-signal {
-  margin-top: 0.4em;
+  position: relative;
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+
+  &.idle,
+  &.busy {
+    &::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      border-radius: 50%;
+
+      transition: background .5s linear;
+    }
+  }
+
+  &.idle {
+    &::before {
+      background: @text-color-success;
+    }
+  }
+
   &.busy {
     cursor: wait;
-    color: @text-color-warning;
-  }
-  &.idle {
-    background: radial-gradient(#64c42d .1em, transparent .11em);
+
+    &::before {
+      background-color: @text-color-warning;
+      animation: bounce 1.0s infinite ease-in-out;
+    }
   }
 }
 
-busy-signal.idle::before, busy-signal.idle::after {
-  display: none;
-  -webkit-animation: none;
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(1.0);
+  } 50% {
+    transform: scale(.6);
+  }
 }
