@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "eslint-config-steelbrain": "^3.0.1",
-    "flow-bin": "^0.73.0",
+    "flow-bin": "^0.74.0",
     "jasmine-fix": "^1.0.1"
   },
   "scripts": {
