@@ -2,6 +2,7 @@
 
 import { it, wait } from "jasmine-fix";
 import Registry from "../lib/registry";
+import type { SignalInternal } from "../lib/types";
 
 describe("Registry", function() {
   let registry;
@@ -12,6 +13,17 @@ describe("Registry", function() {
   afterEach(function() {
     registry.dispose();
   });
+
+  function validateTiles(
+    actual: Array<SignalInternal>,
+    expected: Array<string>
+  ) {
+    expect(actual.length).toBe(expected.length);
+
+    actual.forEach((entry, index) => {
+      expect(entry.title).toBe(expected[index]);
+    });
+  }
   function validateOldTiles(
     oldTitles: Array<{ title: string, duration: string }>,
     titles: Array<string>
@@ -52,18 +64,18 @@ describe("Registry", function() {
       provider.add("Wow");
       await wait(1);
       provider.add("Hello");
-      expect(registry.getTilesActive()).toEqual(["Hello", "Wow", "Hey"]);
+      validateTiles(registry.getTilesActive(), ["Hello", "Wow", "Hey"]);
     });
     it("adds removed ones to history", async function() {
       const provider = registry.create();
       provider.add("Boy");
       await wait(1);
       provider.add("Hey");
-      expect(registry.getTilesActive()).toEqual(["Hey", "Boy"]);
+      validateTiles(registry.getTilesActive(), ["Hey", "Boy"]);
       expect(registry.getTilesOld()).toEqual([]);
 
       provider.remove("Hey");
-      expect(registry.getTilesActive()).toEqual(["Boy"]);
+      validateTiles(registry.getTilesActive(), ["Boy"]);
       validateOldTiles(registry.getTilesOld(), ["Hey"]);
     });
     it("adds cleared ones to history", function() {
@@ -71,11 +83,11 @@ describe("Registry", function() {
       provider.add("Hello");
       provider.add("World");
 
-      expect(registry.getTilesActive()).toEqual(["Hello", "World"]);
+      validateTiles(registry.getTilesActive(), ["Hello", "World"]);
       expect(registry.getTilesOld()).toEqual([]);
 
       provider.clear();
-      expect(registry.getTilesActive()).toEqual([]);
+      validateTiles(registry.getTilesActive(), []);
       validateOldTiles(registry.getTilesOld(), ["Hello", "World"]);
     });
   });

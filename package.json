@@ -24,6 +24,11 @@
       "versions": {
         "1.0.0": "providerRegistry"
       }
+    },
+    "atom-ide-busy-signal": {
+      "versions": {
+        "0.1.0": "provideBusySignal"
+      }
     }
   },
   "dependencies": {

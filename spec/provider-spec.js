@@ -17,11 +17,11 @@ describe("Provider", function() {
 
     provider.onDidAdd(function(title) {
       if (timesTriggered === 0) {
-        expect(title).toBe("First");
+        expect(title).toEqual({ title: "First", options: undefined });
       } else if (timesTriggered === 1) {
-        expect(title).toBe("Second");
+        expect(title).toEqual({ title: "Second", options: undefined });
       } else if (timesTriggered === 2) {
-        expect(title).toBe("Third");
+        expect(title).toEqual({ title: "Third", options: undefined });
       } else {
         expect(false).toBe(true);
       }

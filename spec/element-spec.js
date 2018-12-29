@@ -14,37 +14,36 @@ describe("Element", function() {
     element.dispose();
   });
 
+  function validateSetTooltip(call: number, html: string) {
+    expect(element.setTooltip.calls[call].args[0].innerHTML).toEqual(html);
+  }
+
   it("sets a title properly", function() {
-    element.update(["Hello"], []);
+    element.update([{ title: "Hello" }], []);
     expect(element.setBusy).toHaveBeenCalledWith(true);
-    expect(element.setTooltip).toHaveBeenCalledWith(
-      "<strong>Current:</strong><br>Hello"
-    );
+    validateSetTooltip(0, "<strong>Current:</strong><div>Hello</div>");
   });
   it("escapes the given texts", function() {
-    element.update(["<div>"], []);
+    element.update([{ title: "<div>" }], []);
     expect(element.setBusy).toHaveBeenCalledWith(true);
-    expect(element.setTooltip).toHaveBeenCalledWith(
-      "<strong>Current:</strong><br>&lt;div&gt;"
-    );
+    validateSetTooltip(0, "<strong>Current:</strong><div>&lt;div&gt;</div>");
   });
   it("shows idle message when nothing is provided", function() {
     element.update([], []);
     expect(element.setBusy).toHaveBeenCalledWith(false);
-    expect(element.setTooltip).toHaveBeenCalledWith("Idle");
+    validateSetTooltip(0, "Idle");
   });
   it("shows only history when current is not present", function() {
     element.update([], [{ title: "Yo", duration: "1m" }]);
     expect(element.setBusy).toHaveBeenCalledWith(false);
-    expect(element.setTooltip).toHaveBeenCalledWith(
-      "<strong>History:</strong><br>Yo (1m)"
-    );
+    validateSetTooltip(0, "<strong>History:</strong><div>Yo (1m)</div>");
   });
   it("shows both history and current when both are present", function() {
-    element.update(["Hey"], [{ title: "Yo", duration: "1m" }]);
+    element.update([{ title: "Hey" }], [{ title: "Yo", duration: "1m" }]);
     expect(element.setBusy).toHaveBeenCalledWith(true);
-    expect(element.setTooltip).toHaveBeenCalledWith(
-      "<strong>History:</strong><br>Yo (1m)<br><strong>Current:</strong><br>Hey"
+    validateSetTooltip(
+      0,
+      "<strong>History:</strong><div>Yo (1m)</div><strong>Current:</strong><div>Hey</div>"
     );
   });
 });
