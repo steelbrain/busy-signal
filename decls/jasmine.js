@@ -1,7 +1,5 @@
 /* @flow */
 
-declare var atom: any;
-
 declare function describe(description: string, specDefinitions: () => void): void;
 declare function xdescribe(description: string, specDefinitions: () => void): void;
 
