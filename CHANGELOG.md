@@ -1,3 +1,7 @@
+## 2.0.0
+
+- support the API provided by the busy signal of the now retired atom-ide-ui package
+
 ## 1.4.3
 
 - Fix an issue with addEventListener
