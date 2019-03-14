@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Fix updating the title of an IDE provider (@robertrossmann)
+
 ## 2.0.0
 
 - support the API provided by the busy signal of the now retired atom-ide-ui package
