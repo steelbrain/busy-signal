@@ -1,12 +1,12 @@
 /* @flow */
 
-import Element from "../lib/element";
+import { SignalElement } from "../lib/element";
 
 describe("Element", function() {
   let element;
 
   beforeEach(function() {
-    element = new Element();
+    element = new SignalElement();
     spyOn(element, "setTooltip").andCallThrough();
     spyOn(element, "setBusy").andCallThrough();
   });
