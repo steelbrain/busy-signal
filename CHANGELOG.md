@@ -1,3 +1,7 @@
+## 2.0.2
+
+- Fix compatibility with newer Electron versions (by using `document.registerElement`). Thanks @icecream17 @confused-Techie
+
 ## 2.0.1
 
 - Fix updating the title of an IDE provider (@robertrossmann)
