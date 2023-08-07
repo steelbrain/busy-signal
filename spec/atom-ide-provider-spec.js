@@ -68,7 +68,7 @@ describe("Atom IDE Provider", function() {
       validateTiles(registry.getTilesActive(), ["Hi"]);
       msg.setTitle("Howdy");
       validateTiles(registry.getTilesActive(), ["Howdy"]);
-      msg.setTitle("Whatsup")
+      msg.setTitle("Whatsup");
       validateTiles(registry.getTilesActive(), ["Whatsup"]);
       msg.dispose();
       validateTiles(registry.getTilesActive(), []);
